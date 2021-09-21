@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{#{% laod static %}#}
+
+
+{% block title %}
+
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+
+
+{% block body %}
+
+    <div class="container-fluid">
+        {% for node in mind_map %}
+            <div class="row">
+                <div class="col">
+                    <a href="{% url 'mind:detail' node.id %}">{{ node.id }}</a>
+                </div>
+                <div class="col">
+                    <p>{{ node.root_node.id }} {{ node.root_node.title }} {{ node.root_node.content }}</p>
+                </div>
+            </div>
+    {% endfor %}
+    </div>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block js %}
+{% endblock %}

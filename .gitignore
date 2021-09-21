@@ -1,0 +1,9 @@
+venv/
+
+*.sqlite3
+*.exe
+.idea/
+
+**/__pycache__/
+
+act.sh

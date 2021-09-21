@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+{% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <h2>{{ tree.node.title }}</h2>
+                {{ tree.node.content }}
+            </div>
+        </div>
+        <form action={% url 'mind:attach' mind_map_id tree.node.id %} method="POST">
+            {% csrf_token %}
+            <input type="text" name="title">
+            <input type="text" name="content">
+            <input type="submit">
+        </form>
+        {% for rn in tree.children %}
+            <div class="row">
+                <div class="col">
+                    <h3>     {{ rn.node.title }}</h3>
+                    <p>      {{ rn.node.content }}</p>
+                </div>
+            </div>
+            <form action={% url 'mind:attach' mind_map_id rn.node.id %} method="POST">
+                {% csrf_token %}
+                <input type="text" name="title">
+                <input type="text" name="content">
+                <input type="submit">
+            </form>
+            {% for n1 in rn.children %}
+
+                <div class="row">
+                    <div class="col">
+                        <h2>{{ n1.node.title }}</h2>
+                        <form action="{% url 'mind:create' %}" method="POST">
+                            {% csrf_token %}
+                            <h2>{{ n1.node.title }}</h2>
+                            <label for="title">Title</label>
+                            <input type="text" name="title">
+                            <label for="content">Content</label>
+                            <input type="text" name="content">
+                            <button>
+                                <input type="submit" value="Create">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+        {% endfor %}
+    </div>
+
+
+
+{% endblock %}
+
+
+
+{% block js %}
+{% endblock %}
