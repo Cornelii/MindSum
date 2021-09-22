@@ -23,7 +23,7 @@ class Node(models.Model):
 
 
 class MindMap(models.Model):
-    root_node = models.OneToOneField('Node', on_delete=models.CASCADE, related_name = 'mind_map')
+    root_node = models.OneToOneField('Node', on_delete=models.CASCADE, related_name='mind_map')
     max_depth = models.IntegerField(default=5)
 
 

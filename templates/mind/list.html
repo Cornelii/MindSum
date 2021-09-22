@@ -13,7 +13,14 @@
 
 {% block body %}
 
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>Make MindMap for Test</h3>
+            </div>
+        </div>
+
+
         {% for node in mind_map %}
             <div class="row">
                 <div class="col">
@@ -24,6 +31,19 @@
                 </div>
             </div>
     {% endfor %}
+
+
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'mind:detail' 0 %}" method="POST" class="form-group">
+                    {% csrf_token %}
+                    {{ form }}
+
+                    <button class="btn btn-primary" type="submit">Create</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 

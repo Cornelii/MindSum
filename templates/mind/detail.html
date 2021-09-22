@@ -17,7 +17,7 @@
                 {{ tree.node.content }}
             </div>
         </div>
-        <form action={% url 'mind:attach' mind_map_id tree.node.id %} method="POST">
+        <form action={% url 'mind:node' mind_map_id tree.node.id %} method="POST">
             {% csrf_token %}
             <input type="text" name="title">
             <input type="text" name="content">
@@ -30,7 +30,7 @@
                     <p>      {{ rn.node.content }}</p>
                 </div>
             </div>
-            <form action={% url 'mind:attach' mind_map_id rn.node.id %} method="POST">
+            <form action={% url 'mind:node' mind_map_id rn.node.id %} method="POST">
                 {% csrf_token %}
                 <input type="text" name="title">
                 <input type="text" name="content">
