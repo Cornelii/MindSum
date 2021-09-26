@@ -11,6 +11,8 @@ urlpatterns = [
     path('', api_schema_view, name='api_doc'),
     path('minds/', views.mind_map_list, name='mind_map_list'),
     path('mind/<int:mind_map_id>/', MindMapAPIView.as_view(), name='mind_map'),
-    path('node/<int:node_id>/', NodeAPIView.as_view(), name='node'),
-    path('node/<int:node_id>/all/', views.subnode, name='subnodes'),
+    path('mind/<int:mind_map_id>/<int:node_id>/', NodeAPIView.as_view(), name='node_from_mind'),
+    path('mind/<int:mind_map_id>/<int:node_id>/all/', views.subnode, name='subnodes_from_mind'),
+    path('node/<int:mind_map_id>/<int:node_id>/', NodeAPIView.as_view(), name='node'),
+    path('node/<int:mind_map_id>/<int:node_id>/all/', views.subnode, name='subnodes'),
 ]

@@ -15,7 +15,7 @@ def make_query_set(node, depth=1, max_depth=8):
 
 
 def recursive_data(instance):
-    a = {'title': instance.node.title, 'content': instance.node.content, 'depth': instance.node.depth}
+    a = {'title': instance.node.title, 'content': instance.node.content, 'depth': instance.node.depth, 'id': instance.node.id}
     children = []
     for node in instance.children:
         children.append(recursive_data(node))

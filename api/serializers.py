@@ -22,7 +22,7 @@ class TreeSerializer(serializers.BaseSerializer):
 
 
     def recursive_data(self, instance):
-        a = {'title':instance.node.title, 'content':instance.node.content, 'depth':instance.node.depth}
+        a = {'title':instance.node.title, 'content':instance.node.content, 'depth':instance.node.depth, 'id':instance.node.id}
         children = []
         for node in instance.children:
             children.append(self.recursive_data(node))

@@ -42,11 +42,26 @@ class MindMapView(View):
         return redirect('mind:minds')
 
     def put(self, *args, **kwargs):
+        mind_map_id = kwargs.get('mind_map_id', 0)
+        mind_map = get_object_or_404(MindMap, id=mind_map_id)
+        root_node = mind_map.root_node
+        form = NodeModelForm(self.request.POST, instance=root_node)
+        if form.is_valid():
+            node = form.save()
+        if self.request.POST.get('max_depth', 0):
+            mind_map.max_depth = int(self.request.POST.get('max_depth'))
+            mind_map.save()
 
-        form = NodeModelForm(self.request.POST)
+        return redirect('mind:minds')
 
     def delete(self, *args, **kwargs):
-        pass
+        mind_map_id = kwargs.get('mind_map_id', 0)
+        mind_map = get_object_or_404(MindMap, id=mind_map_id)
+        root_node = mind_map.root_node
+        root_node.delete()
+        mind_map.delete()
+
+        return redirect('mind:minds')
 
 
 def minds(request):
@@ -96,11 +111,19 @@ class NodeView(View):
         return redirect('mind:detail', mind_map.id)
 
     def put(self, *args, **kwargs):
-        pass
+        mind_map, node = self.valid(*args, **kwargs)
+
+        form = NodeModelForm(self.request.POST, instance=node)
+        if form.is_valid():
+            put_node = form.save()
+
+        return redirect('mind:detail', mind_map.id)
 
     def delete(self, *args, **kwargs):
-        pass
+        mind_map, node = self.valid(*args, **kwargs)
 
+        node.delete()
+        return redirect('mind:detail', mind_map.id)
 
 
 
